@@ -43,4 +43,12 @@ router.delete('/:id', asyncHandler(async (req, res, next) => {
 
 }));
 
+// get project actions
+
+router.get('/:id/actions', asyncHandler(async (req, res, next) => {
+  const actions = await projectsDb.getProjectActions(req.params.id);
+  if (actions.length === 0) res.status(500).json({ message: 'No actions for this project'});
+  res.status(200).json(actions);
+}));
+
 module.exports = router;
